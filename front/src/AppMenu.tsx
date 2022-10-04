@@ -16,10 +16,22 @@ const AppMenu = () => {
 			</Menu.Item>
 			<Menu.Item>
 				<Link
-					className={location.pathname === "/stats" ? "active" : undefined}
-					to="/stats"
+					className={
+						location.pathname === "/stats/champions" ? "active" : undefined
+					}
+					to="/stats/champions"
 				>
-					Statistics
+					Champions
+				</Link>
+			</Menu.Item>
+			<Menu.Item>
+				<Link
+					className={
+						location.pathname === "/stats/augments" ? "active" : undefined
+					}
+					to="/stats/augments"
+				>
+					Augments
 				</Link>
 			</Menu.Item>
 		</Menu>

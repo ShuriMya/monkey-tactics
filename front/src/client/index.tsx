@@ -1,7 +1,8 @@
 import { PlayersRankingData } from "../pages/Leaderboard/PlayersRankings";
 import { MatchHistoryData, PlayerProfile } from "../pages/PlayerProfile";
-import { ChampionsStatsData } from "../pages/Stats/ChampionStatsTable";
-import { PatchFilters } from "../pages/Stats/Filters";
+import { ChampionsStatsData } from "../pages/Stats/Champions/ChampionStatsTable";
+import { AugmentsStatsData } from "../pages/Stats/Augments/AugmentsStatsTable";
+import { PatchFilters } from "../pages/Stats/common/Filters";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -58,12 +59,32 @@ export const getMatchHistory = async (
 	}
 };
 
-export const getStats = async (filters: {
+export const getChampionsStats = async (filters: {
 	patch: string;
 }): Promise<ChampionsStatsData | undefined> => {
 	let results;
 	try {
-		results = await fetch(`${BACKEND_URL}/stats/?patch=${filters.patch}`, {});
+		results = await fetch(
+			`${BACKEND_URL}/stats/champions/?patch=${filters.patch}`,
+			{}
+		);
+		if (results.ok) return results.json();
+		return undefined;
+	} catch (error) {
+		console.error("There has been a problem when fetching the stats", error);
+		return undefined;
+	}
+};
+
+export const getAugmentsStats = async (filters: {
+	patch: string;
+}): Promise<AugmentsStatsData | undefined> => {
+	let results;
+	try {
+		results = await fetch(
+			`${BACKEND_URL}/stats/augments/?patch=${filters.patch}`,
+			{}
+		);
 		if (results.ok) return results.json();
 		return undefined;
 	} catch (error) {

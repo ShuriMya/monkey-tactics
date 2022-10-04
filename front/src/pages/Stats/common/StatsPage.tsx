@@ -1,17 +1,33 @@
 import { useCallback, useEffect, useState } from "react";
-import { getFilters, getStats } from "../../client";
-import ChampionStatsTable, { ChampionsStatsData } from "./ChampionStatsTable";
-import Filters, { PatchFilters } from "./Filters";
+import { getFilters } from "../../../client";
+import Filters, { PatchFilters } from "../common/Filters";
 
-interface StatsPageState {
-	stats: ChampionsStatsData;
+interface StatsPageData<StatsDataT> {
+	nb_games: number;
+	stats: Array<StatsDataT>;
+}
+
+interface StatsPageState<StatsDataT> {
+	stats: StatsPageData<StatsDataT>;
 	filters: PatchFilters;
 	selectedFilter: string | undefined;
 	loading: boolean;
 }
 
-const Stats = () => {
-	const [pageState, setPageState] = useState<StatsPageState>({
+interface StatsPageProps<StatsDataT> {
+	fetchStats: (filters: {
+		patch: string;
+	}) => Promise<StatsPageData<StatsDataT> | undefined>;
+	StatsTableComponent: (props: {
+		data: StatsPageData<StatsDataT>;
+	}) => JSX.Element;
+}
+
+const StatsPage = <StatsDataT,>({
+	fetchStats,
+	StatsTableComponent,
+}: StatsPageProps<StatsDataT>) => {
+	const [pageState, setPageState] = useState<StatsPageState<StatsDataT>>({
 		loading: true,
 		stats: { nb_games: 0, stats: [] },
 		filters: [],
@@ -34,7 +50,9 @@ const Stats = () => {
 
 	const updateStats = useCallback(async () => {
 		if (!pageState.selectedFilter) return;
-		const stats = (await getStats({ patch: pageState.selectedFilter })) ?? {
+		const stats = (await fetchStats({
+			patch: pageState.selectedFilter,
+		})) ?? {
 			nb_games: 0,
 			stats: [],
 		};
@@ -49,20 +67,19 @@ const Stats = () => {
 	}, [pageState.selectedFilter]);
 
 	if (pageState.loading) {
-		return <h1 className="text-xl font-bold mb-6">Stats (Loading...)</h1>;
+		return <></>;
 	}
 
 	return (
 		<>
-			<h1 className="text-xl font-bold mb-6">Stats</h1>
 			<Filters
 				onPatchFilterChange={onPatchFilterChange}
 				allFilters={pageState.filters}
 				selectedFilter={pageState.selectedFilter || ""}
 			/>
-			<ChampionStatsTable data={pageState.stats} />
+			<StatsTableComponent data={pageState.stats} />
 		</>
 	);
 };
 
-export default Stats;
+export default StatsPage;

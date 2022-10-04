@@ -1,6 +1,8 @@
+import { useCallback } from "react";
 import { Table } from "react-daisyui";
-import { Champion } from "../../assets";
-import { units } from "../../assets/Champion";
+import { Champion } from "../../../assets";
+import { units } from "../../../assets/Champion";
+import StatsTable from "../common/StatsTable";
 
 export type ChampionStatsData = {
 	name: string;
@@ -35,33 +37,37 @@ const ChampionStatsRow = ({
 				/>
 				{units[championStats.name]}
 			</span>
-			<span>{championStats.count}</span>
-			<span>{((100 * championStats.count) / totalGames).toFixed(2)} %</span>
 			<span>{championStats.placement_avg.toFixed(2)}</span>
+			<span>
+				{championStats.count} (
+				{((100 * championStats.count) / totalGames).toFixed(2)} %)
+			</span>
 		</Table.Row>
 	);
 };
 
 const ChampionStatsTable = ({ data }: ChampionStatsTableProps) => {
-	return (
-		<Table className="rounded-box w-full">
-			<Table.Head>
-				<span>Unit</span>
-				<span>Played</span>
-				<span>Play Rate</span>
-				<span>Average Placement</span>
-			</Table.Head>
-			<Table.Body>
-				{data.stats.map((champion) => (
-					<ChampionStatsRow
-						championStats={champion}
-						totalGames={data.nb_games}
-						key={champion.name}
-					/>
-				))}
-			</Table.Body>
-		</Table>
+	const headers: Array<{ name: string; sortField: keyof ChampionStatsData }> = [
+		{
+			name: "Unit",
+			sortField: "name",
+		},
+		{ name: "Avg Place", sortField: "placement_avg" },
+		{ name: "Played", sortField: "count" },
+	];
+
+	const renderRow = useCallback(
+		(champion: ChampionStatsData) => (
+			<ChampionStatsRow
+				championStats={champion}
+				totalGames={data.nb_games}
+				key={champion.name}
+			/>
+		),
+		[data.nb_games]
 	);
+
+	return <StatsTable data={data} columns={headers} renderRow={renderRow} />;
 };
 
 export default ChampionStatsTable;
