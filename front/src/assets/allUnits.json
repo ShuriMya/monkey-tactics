@@ -1,0 +1,118 @@
+[
+	{ "name": "TFT7_AoShin", "assetName": "AoShin", "displayName": "Ao Shin" },
+	{
+		"name": "TFT7_Aphelios",
+		"assetName": "Aphelios",
+		"displayName": "Aphelios"
+	},
+	{
+		"name": "TFT7_AurelionSol",
+		"assetName": "AurelionSol",
+		"displayName": "Aurelion Sol"
+	},
+	{ "name": "TFT7_Bard", "assetName": "Bard", "displayName": "Bard" },
+	{ "name": "TFT7_Braum", "assetName": "Braum", "displayName": "Braum" },
+	{ "name": "TFT7_DragonBlue", "assetName": "Daeja", "displayName": "Daeja" },
+	{ "name": "TFT7_Diana", "assetName": "Diana", "displayName": "Diana" },
+	{ "name": "TFT7_Ezreal", "assetName": "Ezreal", "displayName": "Ezreal" },
+	{ "name": "TFT7_Gnar", "assetName": "Gnar", "displayName": "Gnar" },
+	{ "name": "TFT7_Graves", "assetName": "Graves", "displayName": "Graves" },
+	{ "name": "TFT7_Hecarim", "assetName": "Hecarim", "displayName": "Hecarim" },
+	{
+		"name": "TFT7b_Heimerdinger",
+		"assetName": "Heimerdinger",
+		"displayName": "Heimerdinger"
+	},
+	{ "name": "TFT7_DragonGold", "assetName": "Idas", "displayName": "Idas" },
+	{ "name": "TFT7_Jax", "assetName": "Jax", "displayName": "Jax" },
+	{ "name": "TFT7_Jayce", "assetName": "Jayce", "displayName": "Jayce" },
+	{ "name": "TFT7_Kaisa", "assetName": "Kaisa", "displayName": "Kaisa" },
+	{ "name": "TFT7_Karma", "assetName": "Karma", "displayName": "Karma" },
+	{ "name": "TFT7_LeeSin", "assetName": "LeeSin", "displayName": "Lee Sin" },
+	{ "name": "TFT7_Leona", "assetName": "Leona", "displayName": "Leona" },
+	{ "name": "TFT7_Lillia", "assetName": "Lillia", "displayName": "Lillia" },
+	{ "name": "TFT7b_Lulu", "assetName": "Lulu", "displayName": "Lulu" },
+	{ "name": "TFT7_Lux", "assetName": "Lux", "displayName": "Lux" },
+	{
+		"name": "TFT7_Malphite",
+		"assetName": "Malphite",
+		"displayName": "Malphite"
+	},
+	{ "name": "TFT7_Nasus", "assetName": "Nasus", "displayName": "Nasus" },
+	{ "name": "TFT7_Nidalee", "assetName": "Nidalee", "displayName": "Nidalee" },
+	{ "name": "TFT7_Nilah", "assetName": "Nilah", "displayName": "Nilah" },
+	{
+		"name": "TFT7_NomsyCannoneer",
+		"assetName": "Nomsy",
+		"displayName": "Nomsy (Cannoneer)"
+	},
+	{
+		"name": "TFT7_NomsyEvoker",
+		"assetName": "Nomsy",
+		"displayName": "Nomsy (Evoker)"
+	},
+	{
+		"name": "TFT7_NomsyMage",
+		"assetName": "Nomsy",
+		"displayName": "Nomsy (Mage)"
+	},
+	{ "name": "TFT7_Nunu", "assetName": "Nunu", "displayName": "Nunu" },
+	{ "name": "TFT7_Olaf", "assetName": "Olaf", "displayName": "Olaf" },
+	{
+		"name": "TFT7_Pantheon",
+		"assetName": "Pantheon",
+		"displayName": "Pantheon"
+	},
+	{ "name": "TFT7_Qiyana", "assetName": "Qiyana", "displayName": "Qiyana" },
+	{ "name": "TFT7_Rakan", "assetName": "Rakan", "displayName": "Rakan" },
+	{ "name": "TFT7_Rell", "assetName": "Rell", "displayName": "Rell" },
+	{ "name": "TFT7_Rengar", "assetName": "Rengar", "displayName": "Rengar" },
+	{ "name": "TFT7_Sejuani", "assetName": "Sejuani", "displayName": "Sejuani" },
+	{ "name": "TFT7_Senna", "assetName": "Senna", "displayName": "Senna" },
+	{
+		"name": "TFT7_Seraphine",
+		"assetName": "Seraphine",
+		"displayName": "Seraphine"
+	},
+	{ "name": "TFT7_Sett", "assetName": "Sett", "displayName": "Sett" },
+	{
+		"name": "TFT7_DragonGreen",
+		"assetName": "ShiOhYu",
+		"displayName": "Shi Oh Yu"
+	},
+	{ "name": "TFT7_Shyvana", "assetName": "Shyvana", "displayName": "Shyvana" },
+	{ "name": "TFT7_Skarner", "assetName": "Skarner", "displayName": "Skarner" },
+	{ "name": "TFT7_AquaticDragon", "assetName": "Sohm", "displayName": "Sohm" },
+	{ "name": "TFT7_Soraka", "assetName": "Soraka", "displayName": "Soraka" },
+	{ "name": "TFT7_DragonSwain", "assetName": "Swain", "displayName": "Swain" },
+	{ "name": "TFT7_DragonPurple", "assetName": "Syfen", "displayName": "Syfen" },
+	{ "name": "TFT7_Sylas", "assetName": "Sylas", "displayName": "Sylas" },
+	{ "name": "TFT7_Taliyah", "assetName": "Taliyah", "displayName": "Taliyah" },
+	{ "name": "TFT7_DragonEarth", "assetName": "Terra", "displayName": "Terra" },
+	{
+		"name": "TFT7b_Tristana",
+		"assetName": "Tristana",
+		"displayName": "Tristana"
+	},
+	{ "name": "TFT7_Twitch", "assetName": "Twitch", "displayName": "Twitch" },
+	{ "name": "TFT7_Varus", "assetName": "Varus", "displayName": "Varus" },
+	{
+		"name": "TFT7_Vladimir",
+		"assetName": "Vladimir",
+		"displayName": "Vladimir"
+	},
+	{
+		"name": "TFT7b_Volibear",
+		"assetName": "Volibear",
+		"displayName": "Volibear"
+	},
+	{ "name": "TFT7_Wukong", "assetName": "Wukong", "displayName": "Wukong" },
+	{ "name": "TFT7_Xayah", "assetName": "Xayah", "displayName": "Xayah" },
+	{ "name": "TFT7_Yasuo", "assetName": "Yasuo", "displayName": "Yasuo" },
+	{ "name": "TFT7_Yone", "assetName": "Yone", "displayName": "Yone" },
+	{ "name": "TFT7_Zac", "assetName": "Zac", "displayName": "Zac" },
+	{ "name": "TFT7_Zeri", "assetName": "Zeri", "displayName": "Zeri" },
+	{ "name": "TFT7_DragonGuild", "assetName": "Zippy", "displayName": "Zippy" },
+	{ "name": "TFT7_Zoe", "assetName": "Zoe", "displayName": "Zoe" },
+	{ "name": "TFT7_Zyra", "assetName": "Zyra", "displayName": "Zyra" }
+]

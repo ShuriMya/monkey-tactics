@@ -1,7 +1,8 @@
 import { useCallback } from "react";
 import { Table } from "react-daisyui";
+
 import { Champion } from "assets";
-import { units } from "assets/Champion";
+import allUnits from "assets/allUnits.json";
 import StatsTable from "../common/StatsTable";
 
 export type ChampionStatsData = {
@@ -35,7 +36,7 @@ const ChampionStatsRow = ({
 					champion={{ name: championStats.name, rarity: championStats.rarity }}
 					className="w-12 h-12 mr-3"
 				/>
-				{units[championStats.name]}
+				{allUnits.find((unit) => unit.name === championStats.name)?.displayName}
 			</span>
 			<span>{championStats.placement_avg.toFixed(2)}</span>
 			<span>

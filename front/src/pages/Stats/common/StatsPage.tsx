@@ -62,6 +62,7 @@ const StatsPage = <StatsDataT,>({
 	useEffect(() => {
 		initPage();
 	}, []);
+
 	useEffect(() => {
 		updateStats();
 	}, [pageState.selectedFilter]);

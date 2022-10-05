@@ -1,8 +1,9 @@
 import { useCallback } from "react";
 import { Table } from "react-daisyui";
 
+import Augment from "assets/Augments";
+import allAugments from "assets/allAugments.json";
 import StatsTable from "../common/StatsTable";
-import Augment, { allAugments } from "assets/Augments";
 
 export type AugmentStatsData = {
 	name: string;
