@@ -2,6 +2,8 @@ import { PlayersRankingData } from "pages/Leaderboard/PlayersRankings";
 import { MatchHistoryData, PlayerProfile } from "pages/PlayerProfile";
 import { ChampionsStatsData } from "pages/Stats/Champions/ChampionStatsTable";
 import { AugmentsStatsData } from "pages/Stats/Augments/AugmentsStatsTable";
+import { TraitsStatsData } from "pages/Stats/Traits/TraitsStatsTable";
+import { ItemsStatsData } from "pages/Stats/Items/ItemsStatsTable";
 import { PatchFilters } from "pages/Stats/common/Filters";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -83,6 +85,40 @@ export const getAugmentsStats = async (filters: {
 	try {
 		results = await fetch(
 			`${BACKEND_URL}/stats/augments/?patch=${filters.patch}`,
+			{}
+		);
+		if (results.ok) return results.json();
+		return undefined;
+	} catch (error) {
+		console.error("There has been a problem when fetching the stats", error);
+		return undefined;
+	}
+};
+
+export const getTraitsStats = async (filters: {
+	patch: string;
+}): Promise<TraitsStatsData | undefined> => {
+	let results;
+	try {
+		results = await fetch(
+			`${BACKEND_URL}/stats/traits/?patch=${filters.patch}`,
+			{}
+		);
+		if (results.ok) return results.json();
+		return undefined;
+	} catch (error) {
+		console.error("There has been a problem when fetching the stats", error);
+		return undefined;
+	}
+};
+
+export const getItemsStats = async (filters: {
+	patch: string;
+}): Promise<ItemsStatsData | undefined> => {
+	let results;
+	try {
+		results = await fetch(
+			`${BACKEND_URL}/stats/items/?patch=${filters.patch}`,
 			{}
 		);
 		if (results.ok) return results.json();

@@ -19,6 +19,7 @@ export const getTraitLevel = (traitName: string, numUnits: number) => {
 			return level + 1;
 		}
 	}
+
 	return 0;
 };
 
@@ -27,7 +28,7 @@ const TraitImg = ({
 	traitLevel,
 	className,
 }: {
-	trait: Trait;
+	trait: Pick<Trait, "name" | "num_units">;
 	traitLevel: number;
 	className?: string;
 }) => {

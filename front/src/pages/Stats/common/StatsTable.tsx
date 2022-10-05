@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { Table } from "react-daisyui";
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 
 export type StatsData<T> = {
 	nb_games: number;
@@ -64,14 +65,17 @@ const StatsTable = <T,>({ data, columns, renderRow }: StatsTableProps<T>) => {
 					<div
 						key={header.name}
 						onClick={onSortClick(header.sortField, header.name)}
+						className="flex items-center"
 					>
 						<span>{header.name}</span>
-						<span className="ml-2">
-							{header.name === sortState.columnName
-								? sortState.descOrder
-									? "v"
-									: "^"
-								: undefined}
+						<span className="ml-1">
+							{header.name === sortState.columnName ? (
+								sortState.descOrder ? (
+									<MdArrowDropDown size="1.25em" />
+								) : (
+									<MdArrowDropUp size="1.25em" />
+								)
+							) : undefined}
 						</span>
 					</div>
 				))}

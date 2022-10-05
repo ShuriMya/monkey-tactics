@@ -34,6 +34,26 @@ const AppMenu = () => {
 					Augments
 				</Link>
 			</Menu.Item>
+			<Menu.Item>
+				<Link
+					className={
+						location.pathname === "/stats/traits" ? "active" : undefined
+					}
+					to="/stats/traits"
+				>
+					Traits
+				</Link>
+			</Menu.Item>
+			<Menu.Item>
+				<Link
+					className={
+						location.pathname === "/stats/items" ? "active" : undefined
+					}
+					to="/stats/items"
+				>
+					Items
+				</Link>
+			</Menu.Item>
 		</Menu>
 	);
 };
