@@ -1,6 +1,6 @@
 import { Rating } from "react-daisyui";
-import { Champion } from "../../assets";
-import Item from "../../assets/Item";
+import { Champion } from "assets";
+import Item from "assets/Item";
 import { Comp } from "./MatchHistoryTable";
 
 interface UnitsProps {

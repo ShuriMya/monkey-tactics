@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { Table } from "react-daisyui";
-import { Champion } from "../../../assets";
-import { units } from "../../../assets/Champion";
+import { Champion } from "assets";
+import { units } from "assets/Champion";
 import StatsTable from "../common/StatsTable";
 
 export type ChampionStatsData = {

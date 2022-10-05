@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { Progress, Stats } from "react-daisyui";
 import { useParams } from "react-router-dom";
-import { getProfile, getMatchHistory } from "../../client";
-import { PlayersRankingData } from "../Leaderboard/PlayersRankings";
+import { getProfile, getMatchHistory } from "client";
+import { PlayersRankingData } from "pages/Leaderboard/PlayersRankings";
 import MatchHistoryPagination from "./MatchHistoryPagination";
 import MatchHistoryTable, { MatchHistory } from "./MatchHistoryTable";
 

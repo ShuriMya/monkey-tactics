@@ -1,5 +1,5 @@
 import { Comp } from "./MatchHistoryTable";
-import Augment from "../../assets/Augments";
+import Augment from "assets/Augments";
 
 interface AugmentsProps {
 	augments: Comp["augments"];

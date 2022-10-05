@@ -1,4 +1,4 @@
-import { getAugmentsStats } from "../../../client";
+import { getAugmentsStats } from "client";
 import AugmentsStatsTable from "./AugmentsStatsTable";
 import StatsPage from "../common/StatsPage";
 

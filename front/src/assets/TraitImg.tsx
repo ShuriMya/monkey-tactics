@@ -1,6 +1,5 @@
-import { tr } from "date-fns/locale";
 import { useCallback } from "react";
-import { Trait } from "../pages/PlayerProfile/MatchHistoryTable";
+import { Trait } from "pages/PlayerProfile/MatchHistoryTable";
 import Asset from "./Asset";
 
 export const traits: {

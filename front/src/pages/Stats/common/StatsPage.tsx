@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { getFilters } from "../../../client";
+import { getFilters } from "client";
 import Filters, { PatchFilters } from "../common/Filters";
 
 interface StatsPageData<StatsDataT> {

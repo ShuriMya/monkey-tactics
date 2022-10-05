@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Table } from "react-daisyui";
 
 import StatsTable from "../common/StatsTable";
-import Augment, { allAugments } from "../../../assets/Augments";
+import Augment, { allAugments } from "assets/Augments";
 
 export type AugmentStatsData = {
 	name: string;

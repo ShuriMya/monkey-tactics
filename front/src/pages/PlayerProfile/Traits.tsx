@@ -1,6 +1,6 @@
 import { Comp } from "./MatchHistoryTable";
-import { TraitImg } from "../../assets";
-import { getTraitLevel } from "../../assets/TraitImg";
+import { TraitImg } from "assets";
+import { getTraitLevel } from "assets/TraitImg";
 
 interface TraitsProps {
 	traits: Comp["traits"];

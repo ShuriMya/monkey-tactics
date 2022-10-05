@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Unit } from "../pages/PlayerProfile/MatchHistoryTable";
+import { Unit } from "pages/PlayerProfile/MatchHistoryTable";
 import Asset from "./Asset";
 
 export const units: {

@@ -1,8 +1,8 @@
-import { PlayersRankingData } from "../pages/Leaderboard/PlayersRankings";
-import { MatchHistoryData, PlayerProfile } from "../pages/PlayerProfile";
-import { ChampionsStatsData } from "../pages/Stats/Champions/ChampionStatsTable";
-import { AugmentsStatsData } from "../pages/Stats/Augments/AugmentsStatsTable";
-import { PatchFilters } from "../pages/Stats/common/Filters";
+import { PlayersRankingData } from "pages/Leaderboard/PlayersRankings";
+import { MatchHistoryData, PlayerProfile } from "pages/PlayerProfile";
+import { ChampionsStatsData } from "pages/Stats/Champions/ChampionStatsTable";
+import { AugmentsStatsData } from "pages/Stats/Augments/AugmentsStatsTable";
+import { PatchFilters } from "pages/Stats/common/Filters";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 

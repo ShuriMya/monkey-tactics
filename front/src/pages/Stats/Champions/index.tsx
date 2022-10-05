@@ -1,6 +1,5 @@
-import { getChampionsStats } from "../../../client";
-import ChampionStatsTable, { ChampionsStatsData } from "./ChampionStatsTable";
-import { PatchFilters } from "../common/Filters";
+import { getChampionsStats } from "client";
+import ChampionStatsTable from "./ChampionStatsTable";
 import StatsPage from "../common/StatsPage";
 
 const ChampionsStats = () => {

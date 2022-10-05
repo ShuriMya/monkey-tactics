@@ -1,7 +1,5 @@
 const ASSET_BASE_URL = import.meta.env.VITE_ASSETS_URL;
 
-console.log(import.meta.env);
-
 const Asset = ({
 	type,
 	name,
