@@ -9,13 +9,31 @@ def dictfetchall(cursor):
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
 
+def get_current_patch_comps_query(only_monitored=False):
+    monitored_players_filter = (
+        "and player_id in (select id from players_player where monitored = true)"
+        if only_monitored
+        else ""
+    )
+
+    print(monitored_players_filter)
+
+    return f"""
+        select matches_matchcomp.id, matches_matchcomp.player_id, matches_matchcomp.placement from matches_match
+        join matches_matchcomp on matches_match.id = matches_matchcomp.match_id
+        where game_version = %s and queue_id = 1100 {monitored_players_filter}
+        group by matches_matchcomp.id
+    """
+
+
 def get_num_games(cursor, game_version):
     cursor.execute(
         f"""
             select count(*) from matches_match
             join matches_matchcomp on matches_match.id = matches_matchcomp.match_id
-            where game_version = '{game_version}'
-        """
+            where game_version = %s and queue_id = 1100
+        """,
+        [game_version],
     )
     return cursor.fetchone()[0]
 
@@ -23,6 +41,7 @@ def get_num_games(cursor, game_version):
 class ChampionStatsViewset(viewsets.ViewSet):
     def list(self, request):
         game_version = request.query_params.get("patch")
+        only_monitored = request.query_params.get("only_monitored") == "true"
 
         with connection.cursor() as cur:
             nb_games = get_num_games(cur, game_version)
@@ -33,17 +52,15 @@ class ChampionStatsViewset(viewsets.ViewSet):
                     join (
                         select * from matches_matchcomp_units
                         join (
-                            select matches_matchcomp.id, matches_matchcomp.player_id, matches_matchcomp.placement from matches_match
-                            join matches_matchcomp on matches_match.id = matches_matchcomp.match_id
-                            where game_version = '{game_version}'
-                            group by matches_matchcomp.id
+                            {get_current_patch_comps_query(only_monitored)}
                         ) as current_patch_comps
 	                    on matches_matchcomp_units.matchcomp_id = current_patch_comps.id
                     ) as current_patch_champions 
                     on matches_champion.id = current_patch_champions.champion_id
                     group by name, rarity
                     order by count desc
-                """
+                """,
+                [game_version],
             )
             return Response({"nb_games": nb_games, "stats": dictfetchall(cur)})
 
@@ -51,6 +68,7 @@ class ChampionStatsViewset(viewsets.ViewSet):
 class AugmentStatsViewset(viewsets.ViewSet):
     def list(self, request):
         game_version = request.query_params.get("patch")
+        only_monitored = request.query_params.get("only_monitored") == "true"
 
         with connection.cursor() as cur:
             nb_games = get_num_games(cur, game_version)
@@ -61,17 +79,15 @@ class AugmentStatsViewset(viewsets.ViewSet):
                     join (
                         select * from matches_matchcomp_augments
                         join (
-                            select matches_matchcomp.id, matches_matchcomp.player_id, matches_matchcomp.placement from matches_match
-                            join matches_matchcomp on matches_match.id = matches_matchcomp.match_id
-                            where game_version = '{game_version}'
-                            group by matches_matchcomp.id
+                            {get_current_patch_comps_query(only_monitored)}
                         ) as current_patch_comps
 	                    on matches_matchcomp_augments.matchcomp_id = current_patch_comps.id
-                    ) as current_patch_augments 
+                    ) as current_patch_augments
                     on matches_augment.id = current_patch_augments.augment_id
                     group by name
                     order by count desc
-                """
+                """,
+                [game_version],
             )
             return Response({"nb_games": nb_games, "stats": dictfetchall(cur)})
 
@@ -79,6 +95,7 @@ class AugmentStatsViewset(viewsets.ViewSet):
 class TraitStatsViewset(viewsets.ViewSet):
     def list(self, request):
         game_version = request.query_params.get("patch")
+        only_monitored = request.query_params.get("only_monitored") == "true"
 
         with connection.cursor() as cur:
             nb_games = get_num_games(cur, game_version)
@@ -89,17 +106,15 @@ class TraitStatsViewset(viewsets.ViewSet):
                     join (
                         select * from matches_matchcomp_traits
                         join (
-                            select matches_matchcomp.id, matches_matchcomp.player_id, matches_matchcomp.placement from matches_match
-                            join matches_matchcomp on matches_match.id = matches_matchcomp.match_id
-                            where game_version = '{game_version}'
-                            group by matches_matchcomp.id
+                            {get_current_patch_comps_query(only_monitored)}
                         ) as current_patch_comps
 	                    on matches_matchcomp_traits.matchcomp_id = current_patch_comps.id
                     ) as current_patch_traits
                     on matches_trait.id = current_patch_traits.trait_id
                     group by name, tier
                     order by count desc
-                """
+                """,
+                [game_version],
             )
             return Response({"nb_games": nb_games, "stats": dictfetchall(cur)})
 
@@ -107,6 +122,7 @@ class TraitStatsViewset(viewsets.ViewSet):
 class ItemStatsViewset(viewsets.ViewSet):
     def list(self, request):
         game_version = request.query_params.get("patch")
+        only_monitored = request.query_params.get("only_monitored") == "true"
 
         with connection.cursor() as cur:
             nb_games = get_num_games(cur, game_version)
@@ -119,10 +135,7 @@ class ItemStatsViewset(viewsets.ViewSet):
 						join (
 							select * from matches_matchcomp_units
 							join (
-								select matches_matchcomp.id, matches_matchcomp.player_id, matches_matchcomp.placement from matches_match
-								join matches_matchcomp on matches_match.id = matches_matchcomp.match_id
-                                where game_version = '{game_version}'
-								group by matches_matchcomp.id
+                                {get_current_patch_comps_query(only_monitored)}
 							) as current_patch_comps
 							on matches_matchcomp_units.matchcomp_id = current_patch_comps.id
 						) as current_patch_champions 
@@ -131,6 +144,7 @@ class ItemStatsViewset(viewsets.ViewSet):
                     on matches_item.id = current_patch_items.item_id	
                     group by matches_item.id
                     order by count desc
-                """
+                """,
+                [game_version],
             )
             return Response({"nb_games": nb_games, "stats": dictfetchall(cur)})

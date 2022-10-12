@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getFilters } from "client";
 import Filters, { PatchFilters } from "../common/Filters";
 
@@ -10,13 +10,17 @@ interface StatsPageData<StatsDataT> {
 interface StatsPageState<StatsDataT> {
 	stats: StatsPageData<StatsDataT>;
 	filters: PatchFilters;
-	selectedFilter: string | undefined;
+	selectedFilters: {
+		game_version: string | undefined;
+		only_monitored: boolean;
+	};
 	loading: boolean;
 }
 
 interface StatsPageProps<StatsDataT> {
 	fetchStats: (filters: {
 		patch: string;
+		only_monitored: boolean;
 	}) => Promise<StatsPageData<StatsDataT> | undefined>;
 	StatsTableComponent: (props: {
 		data: StatsPageData<StatsDataT>;
@@ -31,12 +35,31 @@ const StatsPage = <StatsDataT,>({
 		loading: true,
 		stats: { nb_games: 0, stats: [] },
 		filters: [],
-		selectedFilter: undefined,
+		selectedFilters: { game_version: undefined, only_monitored: false },
 	});
 
-	const onPatchFilterChange = useCallback((selectedFilter: string) => {
-		setPageState((oldState) => ({ ...oldState, selectedFilter }));
+	const onPatchFilterChange = useCallback((newPatch: string) => {
+		setPageState((oldState) => ({
+			...oldState,
+			selectedFilters: {
+				...oldState.selectedFilters,
+				game_version: newPatch,
+			},
+		}));
 	}, []);
+
+	const onMonitorFilterChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setPageState((oldState) => ({
+				...oldState,
+				selectedFilters: {
+					...oldState.selectedFilters,
+					only_monitored: e.target.checked,
+				},
+			}));
+		},
+		[]
+	);
 
 	const initPage = useCallback(async () => {
 		const filters = await getFilters();
@@ -44,20 +67,24 @@ const StatsPage = <StatsDataT,>({
 			...oldState,
 			loading: false,
 			filters,
-			selectedFilter: filters[filters.length - 1].game_version,
+			selectedFilters: {
+				...oldState.selectedFilters,
+				game_version: filters[filters.length - 1].game_version,
+			},
 		}));
 	}, []);
 
 	const updateStats = useCallback(async () => {
-		if (!pageState.selectedFilter) return;
+		if (!pageState.selectedFilters) return;
 		const stats = (await fetchStats({
-			patch: pageState.selectedFilter,
+			patch: pageState.selectedFilters.game_version ?? "",
+			only_monitored: pageState.selectedFilters.only_monitored,
 		})) ?? {
 			nb_games: 0,
 			stats: [],
 		};
 		setPageState((oldState) => ({ ...oldState, stats }));
-	}, [pageState.selectedFilter]);
+	}, [pageState.selectedFilters]);
 
 	useEffect(() => {
 		initPage();
@@ -65,7 +92,7 @@ const StatsPage = <StatsDataT,>({
 
 	useEffect(() => {
 		updateStats();
-	}, [pageState.selectedFilter]);
+	}, [pageState.selectedFilters]);
 
 	if (pageState.loading) {
 		return <></>;
@@ -75,8 +102,9 @@ const StatsPage = <StatsDataT,>({
 		<>
 			<Filters
 				onPatchFilterChange={onPatchFilterChange}
+				onMonitoredFilterChange={onMonitorFilterChange}
 				allFilters={pageState.filters}
-				selectedFilter={pageState.selectedFilter || ""}
+				selectedFilters={pageState.selectedFilters}
 			/>
 			<StatsTableComponent data={pageState.stats} />
 		</>

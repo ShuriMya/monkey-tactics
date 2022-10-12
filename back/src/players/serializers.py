@@ -14,3 +14,7 @@ class LeaderboardSerializer(serializers.ModelSerializer):
     class Meta:
         model = RankHistory
         fields = ["player", "tier", "rank", "lp", "timestamp", "tops", "bottoms"]
+
+
+class WinCountSerializer(serializers.Serializer):
+    wins = serializers.IntegerField()

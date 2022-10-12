@@ -1,16 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { Progress, Stats } from "react-daisyui";
 import { useParams } from "react-router-dom";
 import { getProfile, getMatchHistory } from "client";
-import { PlayersRankingData } from "pages/Leaderboard/PlayersRankings";
 import MatchHistoryPagination from "./MatchHistoryPagination";
 import MatchHistoryTable, { MatchHistory } from "./MatchHistoryTable";
+import PlayerProfileHeader, { PlayerProfileData } from "./PlayerProfileHeader";
 
-export type PlayerProfile = PlayersRankingData;
 export type MatchHistoryData = { count: number; results: MatchHistory };
 
 interface PlayerProfileState {
-	profile: PlayerProfile | undefined;
+	profile: PlayerProfileData | undefined;
 	matchHistory: MatchHistoryData | undefined;
 	loading: boolean;
 	page: number;
@@ -23,7 +21,7 @@ const PlayerProfile = () => {
 		loading: true,
 		page: 1,
 	});
-	const { playerName } = useParams();
+	const { playerName = "" } = useParams();
 
 	const updatePage = useCallback(
 		(newPage: number) => async () => {
@@ -66,36 +64,11 @@ const PlayerProfile = () => {
 	const games = profile.tops + profile.bottoms;
 	return (
 		<>
-			<div className="bg-base-300">
-				<div>
-					<div className="text-3xl font-bold">{playerName}</div>
-					<div>
-						{profile.tier} {profile.rank} - {profile.lp} LP
-					</div>
-				</div>
-				<div>
-					<Stats className="bg-base-200 stats-vertical">
-						<Stats.Stat>
-							<Stats.Stat.Item variant="title">Games played</Stats.Stat.Item>
-							<Stats.Stat.Item variant="value">{games}</Stats.Stat.Item>
-						</Stats.Stat>
-
-						<Stats.Stat>
-							<Stats.Stat.Item variant="title">Top 4s</Stats.Stat.Item>
-							<Stats.Stat.Item variant="value">{profile.tops}</Stats.Stat.Item>
-							<Stats.Stat.Item variant="desc" className="mt-1">
-								<span>
-									<Progress
-										className="w-24 progress-primary mr-2"
-										value={profile.tops / games}
-									/>
-									{((100 * profile.tops) / games).toFixed(1)} %
-								</span>
-							</Stats.Stat.Item>
-						</Stats.Stat>
-					</Stats>
-				</div>
-			</div>
+			<PlayerProfileHeader
+				playerName={playerName}
+				profile={profile}
+				games={games}
+			/>
 
 			{pageState.matchHistory?.results.length ? (
 				<div>

@@ -37,7 +37,7 @@
 	{
 		"name": "Set7_Dragon",
 		"assetName": "Dragon",
-		"traitRequirements": [2, 5, null]
+		"traitRequirements": [2, 5, 6]
 	},
 	{
 		"name": "Set7_Dragonmancer",
